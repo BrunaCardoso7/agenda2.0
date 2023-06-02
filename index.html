@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.min.css">
+    <title>Document</title>
+
+</head>
+<body>
+    <header>
+        <div id="conteiner_header">
+            <h1 id="text_logo">Agenda<span>Flow</span></h1>
+            <i class="fa-solid fa-arrow-up" id="icon"><p id="text_add">adicionar</p></i>
+        </div>
+    </header>
+    <main>
+        <div id="conteiner_pag">
+            <input type="text" name="f_pesquisar" id="f_pesquisar" placeholder="O que você está proucurando...">
+            <button id="btn_add">pesquisar</button>
+        </div>
+        <div id="fade"></div>
+        <div class="modal_addcontato">
+            <div id="conteiner_header2">
+                <h1 class="textmodal">cadastre aqui um novo contato</h1>
+                <i class="fa-solid fa-xmark " id="iconxhi"></i>
+            </div>
+            <div id="conteiner_body">
+                <form action="#" class="body_modal">
+                    <div class="cadastro_inputs">
+                        <label for="f_nome">Nome</label>
+                        <input type="text" name="f_nome" id="f_nome" class="input">
+                    </div>
+                    <div class="cadastro_inputs">
+                        <label for="f_tel">Telefone</label>
+                        <input type="number" name="f_tel" id="f_tel"  class="input">
+                    </div>
+                    <div class="cadastro_inputs">
+                        <label for="f_email">Email</label>
+                        <input type="email" name="f_email" id="f_email"  class="input">
+                    </div>
+                    <div class="cadastro_inputs">
+                        <label for="f_dt">Data de nascimento</label>
+                        <input type="date" name="f_dt" id="f_dt"  class="input">
+                    </div>
+                    <button id="btn_cad">cadastrar</button>
+                </form>
+            </div>
+        </div>
+        <!-- <table id="table_contatos">
+            <thead>
+                <tr>
+                    <div class="rowHeader">
+                        <th class="itensrow">id</th>
+                        <th class="itensrow">nome</th>
+                        <th class="itensrow">telefone</th>
+                        <th class="itensrow">email</th>
+                        <th class="itensrow">data de nascimento</th>
+                    </div>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="itensrowtd">0</td>
+                    <td class="itensrowtd">bruna</td>
+                    <td class="itensrowtd">987238-3287</td>
+                    <td class="itensrowtd">bruna@gmail.com</td>
+                    <td class="itensrowtd">25-02-2005</td>
+                </tr>
+                <tr>
+                    <td class="itensrowtd">1</td>
+                    <td class="itensrowtd">neymar</td>
+                    <td class="itensrowtd">987238-3287</td>
+                    <td class="itensrowtd">neymar@gmail.com</td>
+                    <td class="itensrowtd">25-02-1950</td>
+                </tr>
+                <tr>
+                    <td class="itensrowtd">2</td>
+                    <td class="itensrowtd">anita</td>
+                    <td class="itensrowtd">987238-3287</td>
+                    <td class="itensrowtd">anita@gmail.com</td>
+                    <td class="itensrowtd">25-02-1970</td>
+                </tr>
+            </tbody>
+        </table> -->
+    </main>
+    <script src="index.js"></script>
+</body>
+</html>
