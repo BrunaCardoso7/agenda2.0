@@ -8,7 +8,7 @@ const btn_cad = document.querySelector('#btn_cad')
 
 const nome = document.getElementById('f_nome')
 const email = document.getElementById('f_email')
-const telefone = document.getElementById('f_telefone')
+const telefone = document.getElementById('f_tel')
 const dtnasc = document.getElementById('f_dt')
 
 btn_closerModal.addEventListener("click", function(){
@@ -42,25 +42,33 @@ window.addEventListener("DOMContentLoaded", function () {
 
         console.log(dados);
 
-        const endpoint = "http://127.0.0.1:1880/id";
-        fetch(endpoint)
+        const cabecalho = {
+            method: 'POST',
+            body: JSON.stringify((dados))
+        }
+
+
+        const endpoint = "http://127.0.0.1:1880/addcontatos";
+        fetch(endpoint, cabecalho)
         // .then(res=> res.json())
         .then(res=>{
             if(res.status == 200){
                 console.log('bunda')
-                resete()
+                return reset()
+            
             }else{
                 for (let i = 0; i<3; i++){
                     alert('FEROOU O SISTEMAAAA PREPARE-SE PARA  THE SHUTDOWN!!!!! UMA AMEAÇA FOI DETECTADA PREPARE PRA O SHUTDOWN')
                 }
+
             }
         })
-        function resete(){
-            f_nome.value = ""
-            f_tel.value = ""
-            f_email.value = ""
-            f_dt.value = ""
-        }
     });
 });
 
+function reset(){
+    nome.value = ''
+    email.value = ''
+    telefone.value = ''
+    dtnasc.value = ''
+}
