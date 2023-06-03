@@ -6,10 +6,10 @@ const btn_add = document.querySelector('#text_add')
 
 const btn_cad = document.querySelector('#btn_cad')
 
-const nome = document.querySelector('#f_nome')
-const email = document.querySelector('#f_email')
-const telefone = document.querySelector('#f_telefone')
-const dtnasc = document.querySelector('#f_dt')
+const nome = document.getElementById('f_nome')
+const email = document.getElementById('f_email')
+const telefone = document.getElementById('f_telefone')
+const dtnasc = document.getElementById('f_dt')
 
 btn_closerModal.addEventListener("click", function(){
     modal.style.display = 'none'
@@ -18,14 +18,49 @@ btn_closerModal.addEventListener("click", function(){
 btn_add.addEventListener("click", function(){
     modal.style.display = 'block'
     fade.style.display = 'block'
-    const endpoint = "http://127.0.0.1:1880/id"
-    fetch(endpoint)
-    .then(res=> res.json())
-    .then(res=>{
-        console.log(res)
-    })
+
 })
 
-btn_cad.addEventListener("click", (evt)=>{
-    nome.textContent
-})
+
+window.addEventListener("DOMContentLoaded", function () {
+    const btn_cad = document.getElementById("btn_cad");
+
+    btn_cad.addEventListener("click", function (evt) {
+        evt.preventDefault(); // Evita o envio do formulário
+
+        const f_nome = document.getElementById("f_nome").value;
+        const f_tel = document.getElementById("f_tel").value;
+        const f_email = document.getElementById("f_email").value;
+        const f_dt = document.getElementById("f_dt").value;
+
+        const dados = {
+        nome: f_nome,
+        telefone: f_tel,
+        email: f_email,
+        dataNascimento: f_dt
+        };
+
+        console.log(dados);
+
+        const endpoint = "http://127.0.0.1:1880/id";
+        fetch(endpoint)
+        // .then(res=> res.json())
+        .then(res=>{
+            if(res.status == 200){
+                console.log('bunda')
+                resete()
+            }else{
+                for (let i = 0; i<3; i++){
+                    alert('FEROOU O SISTEMAAAA PREPARE-SE PARA  THE SHUTDOWN!!!!! UMA AMEAÇA FOI DETECTADA PREPARE PRA O SHUTDOWN')
+                }
+            }
+        })
+        function resete(){
+            f_nome.value = ""
+            f_tel.value = ""
+            f_email.value = ""
+            f_dt.value = ""
+        }
+    });
+});
+
