@@ -11,7 +11,7 @@ const email = document.getElementById('f_email')
 const telefone = document.getElementById('f_tel')
 const dtnasc = document.getElementById('f_dt')
 
-
+const dados = document.querySelector('#dados')
 
 
 
@@ -87,52 +87,27 @@ btn_pesq.addEventListener("click", (evt)=>{
         barra_pesquisa.focus()
         return erro()
     }
-    let dados = document.querySelector('#dados')
+    
     const valorpesq = document.querySelector("input[name=f_radius]:checked").value
     const entpoint = `http://127.0.0.1:1880/pesqcontatos/${valorpesq}/${barra_pesquisa.value}`;
     fetch(entpoint)
     .then(res=>res.json())
     .then((res)=>{
         dados.innerHTML = ""
-        console.log(res)
         res.forEach((element) => {
-            const tablebody = document.querySelector('.conteinertablebody')
-            const rowtable = document.createElement("tr")
-            // const tablebody = document.querySelector('#elementRef')
-
-            const c1 = document.createElement("td")
-            c1.className = 'itensrowtd'
-            c1.setAttribute("id", "itensrowtd1")
-            c1.innerHTML = res[0].n_id_contatos
-            rowtable.appendChild(c1)
-
-            const c2 = document.createElement("td")
-            c2.className = 'itensrowtd'
-            c2.setAttribute("id", "itensrowtd2")
-            c2.innerHTML = res[1].s_nome_contatos
-            rowtable.appendChild(c2)
-
-            const c3 = document.createElement("td")
-            c3.className = 'itensrowtd'
-            c3.setAttribute("id", "itensrowtd3")
-            c3.innerHTML = res[2].n_telefone_contatos
-            rowtable.appendChild(c3)
-
-            const c4 = document.createElement("td")
-            c4.className = 'itensrowtd'
-            c4.setAttribute("id", "itensrowtd4")
-            c4.innerHTML = res[3].s_email_contatos
-            rowtable.appendChild(c4)
-
-            const c5 = document.createElement("td")
-            c5.className = 'itensrowtd'
-            c5.setAttribute("id", "itensrowtd5")
-            c5.innerHTML = res[4].dt_dtnasc_contatos
-            rowtable.appendChild(c5)
-
+            const rowtable = document.createElement("tr");
+            rowtable.setAttribute("class", "conteinertablebody");
+            for (let key in element) {
+                if (element.hasOwnProperty(key)) {
+                  const cell = document.createElement("td");
+                  cell.className = 'itensrowtd';
+                  cell.textContent = element[key];
+                  rowtable.appendChild(cell);
+                }
+              }
             
-            tablebody.appendChild(rowtable)
-        }, 0);
+            dados.appendChild(rowtable)
+        });
       
     })
 })
