@@ -17,8 +17,6 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-
 }
 #icon{
     border: 2px solid green;
@@ -70,6 +68,7 @@ span{
     background-color: green;
     color: aliceblue;
 }
+
 table{
     margin-top: 30px;
     border: 2px solid gray;
