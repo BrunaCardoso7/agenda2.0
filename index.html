@@ -17,6 +17,20 @@
         </div>
     </header>
     <main>
+        <div class="seletores">
+            <p>selecione o filtro de busca:</p>
+            <div class="radios">
+                <label for="f_radius">nome</label>
+                <input type="radio" name="f_radius" id="s_nome" value="s_nome" checked>
+            </div>
+            <div class="radios">
+                <label for="f_radius">telefone</label>
+                <input type="radio" name="f_radius" value="f_tel" id="n_tel">
+            </div>
+            <div class="radios">
+
+            </div>
+        </div>
         <div id="conteiner_pag">
             <input type="text" name="f_pesquisar" id="f_pesquisar" placeholder="O que você está proucurando...">
             <button id="btn_add">pesquisar</button>
@@ -24,7 +38,7 @@
         <div id="fade"></div>
         <div class="modal_addcontato">
             <div id="conteiner_header2">
-                <h1 class="textmodal">cadastre aqui um novo contato</h1>
+                <h1 class="textmodal">Novo contato</h1>
                 <i class="fa-solid fa-xmark " id="iconxhi"></i>
             </div>
             <div id="conteiner_body">
@@ -49,7 +63,7 @@
                 </form>
             </div>
         </div>
-        <!-- <table id="table_contatos">
+        <table id="table_contatos">
             <thead>
                 <tr>
                     <div class="rowHeader">
@@ -84,7 +98,7 @@
                     <td class="itensrowtd">25-02-1970</td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
     </main>
     <script src="index.js"></script>
 

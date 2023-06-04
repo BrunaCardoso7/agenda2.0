@@ -72,3 +72,45 @@ function reset(){
     telefone.value = ''
     dtnasc.value = ''
 }
+
+
+// window.addEventListener("DOMContentLoaded", function() {
+const barra_pesquisa = document.querySelector('#f_pesquisar')
+const btn_pesq = document.querySelector('#btn_add')
+
+btn_pesq.addEventListener("click", (evt)=>{
+    if(barra_pesquisa.value == ""){
+        barra_pesquisa.focus()
+        return erro()
+    }
+
+    const valorpesq = document.querySelector("input[name=f_radius]:checked").value
+    const entpoint = `http://127.0.0.1:1880/pesqcontatos/${valorpesq}/${barra_pesquisa.value}`;
+    fetch(entpoint)
+    .then(res=>res.json())
+    .then(res=>
+        console.log(res)
+    )
+})
+
+function erro(){
+    const erroelement = document.createElement('p')
+    erroelement.className = 'texterror'
+    
+    erroelement.textContent = "digite algo no campo!"
+    
+    const fatterElement = document.querySelector('#conteiner_pag')
+    const elementref = document.querySelector('#table_contatos')
+    fatterElement.parentElement.insertBefore(erroelement, elementref)
+    
+    return setTimeout(()=>reseterror(erroelement), 1000)
+}
+function reseterror(erroelement){
+    const elemento = erroelement
+    elemento.textContent = ''
+}
+// });
+
+
+
+

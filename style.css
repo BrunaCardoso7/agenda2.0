@@ -48,7 +48,7 @@ span{
     justify-content: center;
     margin-top: 30px;
     gap: 5px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 #f_pesquisar{
     width: 70%;
@@ -71,6 +71,7 @@ span{
     color: aliceblue;
 }
 table{
+    margin-top: 30px;
     border: 2px solid gray;
     border-radius: 10px;
 }
@@ -89,15 +90,16 @@ tbody >tr:nth-child(even){
 /* modal */
 .modal_addcontato{
     border: 2px solid gray;
-    width: 35%;
+    width: 300px;
     margin: auto;
     border-radius: 10px;
     display: none;
 
 }
 .textmodal{
+    text-align: center;
     padding-top: 5px;
-    padding-left: 20px;
+    padding-left: 30px;
     font-size: 1.4em;
     color: rgb(3, 178, 0);
     
@@ -139,10 +141,10 @@ tbody >tr:nth-child(even){
     z-index: 15;
 }
 #iconxhi{
-    margin-left: 50px;
+    margin-left: 80px;
     color: green;
     font-size: 1.2em;
-    padding: 0 4px;
+    padding: 0 3px;
     border-radius: 50px;
     border: 2px solid green;
     z-index: 15;
@@ -160,8 +162,20 @@ tbody >tr:nth-child(even){
     width: 50%;
     height: 30px;
     font-weight: 600;
+    margin-top: 20px;
 }
 #btn_cad:hover{
     background-color: green;
     color: white;
+}
+/* pesquisa */
+.seletores{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+.texterror{
+    color: red;
+    margin: 5px 150px;
 }
