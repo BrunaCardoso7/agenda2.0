@@ -87,12 +87,13 @@ btn_pesq.addEventListener("click", (evt)=>{
         barra_pesquisa.focus()
         return erro()
     }
-    
+    const up = document.querySelector("#up")
     const valorpesq = document.querySelector("input[name=f_radius]:checked").value
     const entpoint = `http://127.0.0.1:1880/pesqcontatos/${valorpesq}/${barra_pesquisa.value}`;
     fetch(entpoint)
     .then(res=>res.json())
     .then((res)=>{
+        up.style.display = "none"
         dados.innerHTML = ""
         
         res.forEach((element) => {
@@ -146,8 +147,18 @@ fetch(enqpoint)
                 itemtable.setAttribute("id", `itensrowtd[key]`)
                 itemtable.innerHTML = element[key]
 
-                rowtable.appendChild(itemtable, removerow)
+                rowtable.appendChild(itemtable)
             }
+            const updates = document.createElement("td")
+            updates.setAttribute("class", "itensrowtdedt")
+            const img = document.createElement("i")
+            img.className =  "fa-solid fa-trash-can "
+            updates.appendChild(img)
+            const img2 = document.createElement("i")
+            img2.className =  "fa-solid fa-pen-to-square"
+            updates.appendChild(img2)
+
+            rowtable.appendChild(updates)
             
             dados.appendChild(rowtable)
         })
