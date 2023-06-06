@@ -82,9 +82,10 @@ table{
 }
 .itensrowtd{
     text-align: center;
+    height: 40px;
 }
 tbody >tr:nth-child(even){
-    background-color: rgb(177, 176, 176);
+    background-color: rgba(177, 176, 176, 0.301);
 }
 /* modal */
 .modal_addcontato{
@@ -177,4 +178,8 @@ tbody >tr:nth-child(even){
 .texterror{
     color: red;
     margin: 5px 150px;
+}
+.fa-solid, .fa-trash-can{
+    margin-left: 40px;
+    cursor: pointer;
 }

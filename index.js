@@ -58,6 +58,7 @@ window.addEventListener("DOMContentLoaded", function () {
         .then(res=>{
             if(res.status == 200){
                 console.log('bunda')
+                location.reload()
                 return reset()
             
             }else{
@@ -66,8 +67,10 @@ window.addEventListener("DOMContentLoaded", function () {
                 }
 
             }
+            
         })
     });
+    
 });
 
 function reset(){
@@ -130,41 +133,58 @@ function erro(){
 function reseterror(erroelement){
     erroelement.innerHTML = ""
 }
+const preencherdatareview = ()=>{
+    const enqpoint = `http://127.0.0.1:1880/contatos`;
+    fetch(enqpoint)
+        .then(res=>res.json())
+        .then((res)=>{
+            dados.innerHTML = ""
 
-const enqpoint = `http://127.0.0.1:1880/contatos`;
-fetch(enqpoint)
-    .then(res=>res.json())
-    .then((res)=>{
-        dados.innerHTML = ""
+            res.forEach((element) => {
+                const rowtable = document.createElement("tr")
+                rowtable.setAttribute("class", "conteinertablebody")
 
-        res.forEach((element) => {
-            const rowtable = document.createElement("tr")
-            rowtable.setAttribute("class", "conteinertablebody")
+                for (let key in element){
+                    const itemtable = document.createElement("td")
+                    itemtable.className = 'itensrowtd'
+                    itemtable.setAttribute("id", `itensrowtd[key]`)
+                    itemtable.innerHTML = element[key]
 
-            for (let key in element){
-                const itemtable = document.createElement("td")
-                itemtable.className = 'itensrowtd'
-                itemtable.setAttribute("id", `itensrowtd[key]`)
-                itemtable.innerHTML = element[key]
+                    rowtable.appendChild(itemtable)
+                }
+                const updates = document.createElement("td")
+                updates.setAttribute("class", "itensrowtdedt")
+                const img = document.createElement("i")
+                img.className =  "fa-solid fa-trash-can "
+                
+                img.addEventListener("click", (evt)=>{
+                    const id = evt.target.parentNode.parentNode.firstChild.innerHTML
 
-                rowtable.appendChild(itemtable)
-            }
-            const updates = document.createElement("td")
-            updates.setAttribute("class", "itensrowtdedt")
-            const img = document.createElement("i")
-            img.className =  "fa-solid fa-trash-can "
-            updates.appendChild(img)
-            const img2 = document.createElement("i")
-            img2.className =  "fa-solid fa-pen-to-square"
-            updates.appendChild(img2)
-
-            rowtable.appendChild(updates)
-            
-            dados.appendChild(rowtable)
+                    deletecontato(id)
+                    location.reload()
+                })
+                
+                const img2 = document.createElement("i")
+                img2.className =  "fa-solid fa-pen-to-square"
+                updates.appendChild(img)
+                updates.appendChild(img2)
+                
+                rowtable.appendChild(updates)
+                
+                dados.appendChild(rowtable)
+                
+            })
         })
+}
+preencherdatareview()
+
+function deletecontato(id){
+    let endpoint = `http://127.0.0.1:1880/deletecontatos/${id}`
+    fetch(endpoint)
+    .then((res)=>{
+        console.log('bundA')
+        if(res == 200){
+            preencherdatareview()
+        }
     })
-
-
-
-
-
+}
