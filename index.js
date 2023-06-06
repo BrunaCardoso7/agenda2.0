@@ -58,7 +58,6 @@ window.addEventListener("DOMContentLoaded", function () {
         .then(res=>{
             if(res.status == 200){
                 console.log('bunda')
-                location.reload()
                 return reset()
             
             }else{
@@ -67,10 +66,8 @@ window.addEventListener("DOMContentLoaded", function () {
                 }
 
             }
-            
         })
     });
-    
 });
 
 function reset(){
@@ -161,7 +158,6 @@ const preencherdatareview = ()=>{
                     const id = evt.target.parentNode.parentNode.firstChild.innerHTML
 
                     deletecontato(id)
-                    location.reload()
                 })
                 
                 const img2 = document.createElement("i")
