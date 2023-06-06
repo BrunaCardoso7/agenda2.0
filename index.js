@@ -130,6 +130,29 @@ function reseterror(erroelement){
     erroelement.innerHTML = ""
 }
 
+const enqpoint = `http://127.0.0.1:1880/contatos`;
+fetch(enqpoint)
+    .then(res=>res.json())
+    .then((res)=>{
+        dados.innerHTML = ""
+
+        res.forEach((element) => {
+            const rowtable = document.createElement("tr")
+            rowtable.setAttribute("class", "conteinertablebody")
+
+            for (let key in element){
+                const itemtable = document.createElement("td")
+                itemtable.className = 'itensrowtd'
+                itemtable.setAttribute("id", `itensrowtd[key]`)
+                itemtable.innerHTML = element[key]
+
+                rowtable.appendChild(itemtable, removerow)
+            }
+            
+            dados.appendChild(rowtable)
+        })
+    })
+
 
 
 
