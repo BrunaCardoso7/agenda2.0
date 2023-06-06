@@ -94,18 +94,20 @@ btn_pesq.addEventListener("click", (evt)=>{
     .then(res=>res.json())
     .then((res)=>{
         dados.innerHTML = ""
+        
         res.forEach((element) => {
-            const rowtable = document.createElement("tr");
-            rowtable.setAttribute("class", "conteinertablebody");
-            for (let key in element) {
-                if (element.hasOwnProperty(key)) {
-                  const cell = document.createElement("td");
-                  cell.className = 'itensrowtd';
-                  cell.textContent = element[key];
-                  rowtable.appendChild(cell);
-                }
-              }
-            
+            const rowtable = document.createElement("tr")
+            rowtable.setAttribute("class", "conteinertablebody")
+
+            for (let key in element){
+                const itemtable = document.createElement("td")
+                itemtable.className = 'itensrowtd'
+                itemtable.setAttribute("id", `itensrowtd[key]`)
+                itemtable.innerHTML = element[key]
+
+                rowtable.appendChild(itemtable)
+            }
+
             dados.appendChild(rowtable)
         });
       
@@ -123,6 +125,9 @@ function erro(){
     fatterElement.parentElement.insertBefore(erroelement, elementref)
     
     return setTimeout(()=>reseterror(erroelement), 1000)
+}
+function reseterror(erroelement){
+    erroelement.innerHTML = ""
 }
 
 
