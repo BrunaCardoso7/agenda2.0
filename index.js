@@ -10,6 +10,8 @@ const nome = document.getElementById('f_nome')
 const email = document.getElementById('f_email')
 const telefone = document.getElementById('f_tel')
 const dtnasc = document.getElementById('f_dt')
+const id = document.getElementById('f_id')
+const labelid = document.getElementById('labelid')
 
 const dados = document.querySelector('#dados')
 
@@ -20,9 +22,17 @@ btn_closerModal.addEventListener("click", function(){
     fade.style.display = 'none'
 })
 btn_add.addEventListener("click", function(){
+    const editartext = document.querySelector(".textmodal")
+    editartext.innerHTML = "Novo contato"
+
+    const btn = document.querySelector("#btn_cad")
+    btn.innerHTML = "cadastrar"
+
     modal.style.display = 'block'
     fade.style.display = 'block'
 
+    id.style.display = "none"
+    labelid.style.display = "none"
 })
 
 
@@ -133,7 +143,7 @@ function reseterror(erroelement){
 const preencherdatareview = ()=>{
     const enqpoint = `http://127.0.0.1:1880/contatos`;
     fetch(enqpoint)
-        .then(res=>res.json())
+    .then(res=>res.json())
         .then((res)=>{
             dados.innerHTML = ""
 
@@ -155,13 +165,31 @@ const preencherdatareview = ()=>{
                 img.className =  "fa-solid fa-trash-can "
                 
                 img.addEventListener("click", (evt)=>{
-                    const id = evt.target.parentNode.parentNode.firstChild.innerHTML
-
+                    
+                    
                     deletecontato(id)
                 })
                 
                 const img2 = document.createElement("i")
                 img2.className =  "fa-solid fa-pen-to-square"
+                img2.addEventListener("click", ()=>{
+                    const editartext = document.querySelector(".textmodal")
+                    editartext.innerHTML = "Editar contato"
+
+                    const btn = document.querySelector("#btn_cad")
+                    btn.innerHTML = "Editar"
+
+                    id.style.display = "block"
+                    labelid.style.display = "block"
+
+                    modal.style.display = 'block'
+                    fade.style.display = 'block'
+                    btn.addEventListener("click", ()=>{
+                        
+                        location.reload()
+                    })
+
+                })
                 updates.appendChild(img)
                 updates.appendChild(img2)
                 
@@ -173,6 +201,7 @@ const preencherdatareview = ()=>{
         })
 }
 preencherdatareview()
+
 
 function deletecontato(id){
     let endpoint = `http://127.0.0.1:1880/deletecontatos/${id}`
