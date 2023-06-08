@@ -10,9 +10,8 @@ const nome = document.getElementById('f_nome')
 const email = document.getElementById('f_email')
 const telefone = document.getElementById('f_tel')
 const dtnasc = document.getElementById('f_dt')
-const id = document.getElementById('f_id')
+const id2 =  document.getElementById('#f_nome')
 const labelid = document.getElementById('labelid')
-
 const dados = document.querySelector('#dados')
 
 
@@ -22,17 +21,9 @@ btn_closerModal.addEventListener("click", function(){
     fade.style.display = 'none'
 })
 btn_add.addEventListener("click", function(){
-    const editartext = document.querySelector(".textmodal")
-    editartext.innerHTML = "Novo contato"
-
-    const btn = document.querySelector("#btn_cad")
-    btn.innerHTML = "cadastrar"
-
     modal.style.display = 'block'
     fade.style.display = 'block'
 
-    id.style.display = "none"
-    labelid.style.display = "none"
 })
 
 
@@ -46,6 +37,13 @@ window.addEventListener("DOMContentLoaded", function () {
         const f_tel = document.getElementById("f_tel").value;
         const f_email = document.getElementById("f_email").value;
         const f_dt = document.getElementById("f_dt").value;
+        const editartext = document.querySelector(".textmodal")
+        editartext.innerHTML = "Novo contato"
+
+        id2.style.display = 'none'
+        labelid.style.display = 'none'
+
+
 
         const dados = {
         nome: f_nome,
@@ -166,28 +164,27 @@ const preencherdatareview = ()=>{
                 
                 img.addEventListener("click", (evt)=>{
                     
-                    
+                    const id = evt.target.parentNode.parentNode.firstChild.innerHTML
+                    location.reload() 
                     deletecontato(id)
                 })
                 
                 const img2 = document.createElement("i")
                 img2.className =  "fa-solid fa-pen-to-square"
-                img2.addEventListener("click", ()=>{
+
+                img2.addEventListener("click", (evt)=>{
                     const editartext = document.querySelector(".textmodal")
                     editartext.innerHTML = "Editar contato"
 
                     const btn = document.querySelector("#btn_cad")
                     btn.innerHTML = "Editar"
 
-                    id.style.display = "block"
-                    labelid.style.display = "block"
-
                     modal.style.display = 'block'
                     fade.style.display = 'block'
-                    btn.addEventListener("click", ()=>{
-                        
-                        location.reload()
-                    })
+
+                    
+                    const data = evt.target.parentElement.parentElement.childNodes;
+
 
                 })
                 updates.appendChild(img)
@@ -201,7 +198,6 @@ const preencherdatareview = ()=>{
         })
 }
 preencherdatareview()
-
 
 function deletecontato(id){
     let endpoint = `http://127.0.0.1:1880/deletecontatos/${id}`
