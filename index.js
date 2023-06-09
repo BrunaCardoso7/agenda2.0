@@ -6,11 +6,11 @@ const btn_add = document.querySelector('#text_add')
 
 const btn_cad = document.querySelector('#btn_cad')
 
-const nome = document.getElementById('f_nome')
-const email = document.getElementById('f_email')
-const telefone = document.getElementById('f_tel')
-const dtnasc = document.getElementById('f_dt')
-const id2 =  document.getElementById('#f_nome')
+// const nome = document.getElementById('f_nome')
+// const email = document.getElementById('f_email')
+// const telefone = document.getElementById('f_tel')
+// const dtnasc = document.getElementById('f_dt')
+const id2 =  document.getElementById('f_id')
 const labelid = document.getElementById('labelid')
 const dados = document.querySelector('#dados')
 
@@ -27,13 +27,26 @@ btn_add.addEventListener("click", function(){
 })
 
 
+function preencherFormulario(id, nome, telefone, email, dataNascimento) {
+    // Preencher os campos do formulário do modal com os dados do contato
+    document.getElementById('f_id').value = id;
+    document.getElementById('f_nome').value = nome;
+    document.getElementById('f_tel').value = telefone;
+    document.getElementById('f_email').value = email;
+    document.getElementById('f_dt').value = dataNascimento; 
+}
 window.addEventListener("DOMContentLoaded", function () {
     const btn_cad = document.getElementById("btn_cad");
 
     btn_cad.addEventListener("click", function (evt) {
         evt.preventDefault(); // Evita o envio do formulário
-
-        const f_nome = document.getElementById("f_nome").value;
+        location.reload()
+        adicionarContato()
+    });
+    
+});
+function adicionarContato(){
+    const f_nome = document.getElementById("f_nome").value;
         const f_tel = document.getElementById("f_tel").value;
         const f_email = document.getElementById("f_email").value;
         const f_dt = document.getElementById("f_dt").value;
@@ -75,14 +88,12 @@ window.addEventListener("DOMContentLoaded", function () {
 
             }
         })
-    });
-});
-
-function reset(){
-    nome.value = ''
-    email.value = ''
-    telefone.value = ''
-    dtnasc.value = ''
+        function reset(){
+            f_nome.value = ''
+            f_email.value = ''
+            f_telefone.value = ''
+            f_dtnasc.value = ''
+        }
 }
 
 
@@ -119,7 +130,7 @@ btn_pesq.addEventListener("click", (evt)=>{
 
             dados.appendChild(rowtable)
         });
-      
+        location.reload()
     })
 })
 
@@ -152,7 +163,7 @@ const preencherdatareview = ()=>{
                 for (let key in element){
                     const itemtable = document.createElement("td")
                     itemtable.className = 'itensrowtd'
-                    itemtable.setAttribute("id", `itensrowtd[key]`)
+                    itemtable.setAttribute("id",`itensrowtd[${key}]`);
                     itemtable.innerHTML = element[key]
 
                     rowtable.appendChild(itemtable)
@@ -173,6 +184,7 @@ const preencherdatareview = ()=>{
                 img2.className =  "fa-solid fa-pen-to-square"
 
                 img2.addEventListener("click", (evt)=>{
+                    
                     const editartext = document.querySelector(".textmodal")
                     editartext.innerHTML = "Editar contato"
 
@@ -183,9 +195,32 @@ const preencherdatareview = ()=>{
                     fade.style.display = 'block'
 
                     
-                    const data = evt.target.parentElement.parentElement.childNodes;
-
-
+                    const data = evt.target.parentElement.parentElement.childNodes
+                    console.log(data)
+                    const id = data[0].innerHTML;
+                    const nome = data[1].innerHTML;
+                    const telefone = data[2].innerHTML;
+                    const email = data[3].innerHTML;
+                    const dataNascimento = data[4].innerHTML;
+                    
+                    preencherFormulario(id, nome, telefone, email, dataNascimento)
+                    editartext.addEventListener("click", ()=>{
+                        const endpoint = `http://127.0.0.1:1880/editcontatos/${id.value}/${nome.value}/${telefone.value}/${email.value}/${dataNascimento.value}`
+                        fetch(endpoint)
+                        .then(res=>{
+                            if(res.status == 200){
+                                console.log('bunda')
+                                preencherdtv()
+                            }else{
+                                alert('bunda, bunda, bunda')
+                            }
+                        })
+                        id = data[0].innerHTML
+                        nome = data[1].innerHTML
+                        telefone = data[2].innerHTML
+                        email = data[3].innerHTML
+                        dataNascimento = data[4].innerHTML.split("!")[0]
+                    })
                 })
                 updates.appendChild(img)
                 updates.appendChild(img2)
